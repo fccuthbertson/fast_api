@@ -7,8 +7,10 @@ from sqlalchemy import Boolean, Column, Float, String, Integer
 
 app = FastAPI()
 
+
+#region ignore for now...
 # SqlAlchemy Setup
-SQLALCHEMY_DATABASE_URL = 'sqlite+pysqlite:///./db.sqlite3:'
+SQLALCHEMY_DATABASE_URL = 'sqlite+pysqlite:///./fast_api.db'
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
@@ -47,6 +49,8 @@ class Place(BaseModel):
 
     class Config:
         orm_mode = True
+#endregion
+
 
 # Methods for interacting with the database
 def get_place(db: Session, place_id: int):
@@ -72,6 +76,7 @@ def create_places_view(place: Place, db: Session = Depends(get_db)):
 @app.get('/places/', response_model=List[Place])
 def get_places_view(db: Session = Depends(get_db)):
     return get_places(db)
+
 
 @app.get('/place/{place_id}')
 def get_place_view(place_id: int, db: Session = Depends(get_db)):

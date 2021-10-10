@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "fast_api",
+            "group": "fast_api",
+            "database": "./fast_api.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
